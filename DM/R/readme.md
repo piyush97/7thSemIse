@@ -2,7 +2,7 @@
 
 ## Terminal 
 ```r
-    rscript filename.r
+rscript filename.r
 ```
 
 ## Rstudio
