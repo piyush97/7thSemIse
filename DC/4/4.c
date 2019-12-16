@@ -1,48 +1,24 @@
-#include <stdio.h>
-// #include <malloc.h>
 #include <omp.h>
+#include <stdio.h>
 
-long long factorial(long n)
+void main()
 {
-  long long i, out;
-  out = 1;
-  for (i = 1; i < n + 1; i++)
-    out *= i;
-  return (out);
-}
-
-int main(int argc, char **argv)
-{
-  int i, j, threads;
-  long long *x;
-  long long n = 12;
-
-  /* Set number of threads equal to argv[1] if present */
-  if (argc > 1)
+  long long fact1 = 1, fact2 = 1;
+  int a, i;
+  printf("Enter a number to check its factorial\n");
+  scanf("%d", &a);
+#pragma omp parallel for firstprivate(a) num_threads(8)
+  for (i = 2; i <= a; i++)
   {
-    threads = atoi(argv[1]);
-    if (omp_get_dynamic())
-    {
-      omp_set_dynamic(0);
-      printf("called omp_set_dynamic(0)\n");
-    }
-    omp_set_num_threads(threads);
+    fact1 = fact1 * i;
   }
-
-  printf("%d threads\n", omp_get_max_threads());
-  x = (long long *)malloc(n * sizeof(long));
-  for (i = 0; i < n; i++)
-    x[i] = factorial(i);
-  j = 0;
-
-/* Is the output the same if the following line is commented out? */
-#pragma omp parallel for firstprivate(x, j)
-  for (i = 1; i < n; i++)
+  printf("When first private is not used\n");
+  printf("factorial of %d is %llu \n", a, fact1);
+#pragma omp parallel for firstprivate(a, fact2) num_threads(8)
+  for (i = 2; i <= a; i++)
   {
-    j += i;
-    x[i] = j * x[i - 1];
+    fact2 = fact2 * i;
   }
-  for (i = 0; i < n; i++)
-    printf("factorial(%2d)=%14lld x[%2d]=%14lld\n", i, factorial(i), i, x[i]);
-  return 0;
+  printf("When first private is used\n");
+  printf("factorial of %d is %llu \n", a, fact2);
 }
