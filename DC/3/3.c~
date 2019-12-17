@@ -30,8 +30,8 @@ int *prime_table(int prime_num){
 double *sine_table(int sine_num){
 	int i,j;
 	double a,pi=3.14159;
-	double *sines;
-	sines=(double*)malloc(sine_num * sizeof(double));
+	double sines[sine_num];
+	// sines=(double*)malloc(sine_num * sizeof(double));
 	for(i=0;i<sine_num;i++){
 		sines[i]=0.0;
 		for(j=0;j<=i;j++){
