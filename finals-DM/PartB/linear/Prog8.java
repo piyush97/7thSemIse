@@ -1,13 +1,15 @@
+//y=Mx+b;
 import java.util.*;
 
-class LinearRegression
+class prog8
 {
-	public static void main(String args[]) {
+	public static void main(String args[])
+	{
 		double M=-1000;
 		double B=-1000;
 		//y=5x+2
 		double mean_x=0,mean_y=0,cov_xy=0,var_x=0;
-		double[] x = { 1, 2, 3, 4, 5, 6, 7, 8 };
+		double[] x = { 1, 2, 3, 4, 5, 6, 7, 8};
 		double[] y = { 7,12,17,22,27,32,37,42};
 		for(int i=0;i<x.length;i++)
 		{
