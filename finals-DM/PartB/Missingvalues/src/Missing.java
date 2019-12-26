@@ -1,7 +1,16 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
-public class MainClass {
+public class Missing {
 	
 	Scanner in=new Scanner(System.in);
 	ArrayList<String[]> data;
@@ -41,10 +50,8 @@ public class MainClass {
 		String maxValName = null;
 		int maxVal=0;
 		for(Map.Entry<String, Integer> me:hm.entrySet()) {
-			if(me.getValue()>maxVal){
-				maxVal=me.getValue();
+			if(me.getValue()>maxVal)
 				maxValName=me.getKey();
-			}
 		}
 		
 		for(String[] row: data) {
@@ -52,8 +59,6 @@ public class MainClass {
 				row[col]=maxValName;
 			}
 		}
-		
-		
 	}
 	
 	public void missingInteger(int col, String defValue) {
@@ -94,8 +99,8 @@ public class MainClass {
 	}
 
 	public static void main(String[] args) {
-		MainClass mc=new MainClass();
-		mc.loadFile("input.csv");
+		Missing mc=new Missing();
+		mc.loadFile("/Users/vishalprabhachandar/Documents/Programming/DataminingLab/Java-Programs/B2/src/input.csv");
 		mc.missingString(5, "NA");
 		mc.missingInteger(1, "NA");
 		mc.generateFile();
