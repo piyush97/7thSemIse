@@ -8,5 +8,5 @@ model<- lm(features,new_data)
 plot(features)
 abline(model)
 test<- data.frame(num=c(200))
-ans<-prefict(model,test)
+ans<-predict(model,test)
 ans
